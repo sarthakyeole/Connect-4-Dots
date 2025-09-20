@@ -1,10 +1,10 @@
 #include "game.h"
 #include <stdio.h>
 
-// ANSI escape codes for color
-#define RESET "\x1b[0m"
-#define ORANGE "\x1b[93m"
-#define RED "\x1b[0;31m"
+// ansi codes
+#define reset "\x1b[0m"
+#define orange "\x1b[93m"
+#define red "\x1b[0;31m"
 
 void clear_screen()
 {
@@ -14,52 +14,52 @@ void clear_screen()
 void display_board(Game *game)
 {
     clear_screen();
-    printf("%s--------------------%s\n", ORANGE, RESET);
-    printf("%sCONNECT 4 (Move %d)%s\n", ORANGE, game->current_move, RESET);
-    printf("%s--------------------%s\n", ORANGE, RESET);
+    printf("%s--------------------%s\n", orange, reset);
+    printf("%sCONNECT 4 (Move %d)%s\n", orange, game->current_move, reset);
+    printf("%s--------------------%s\n", orange, reset);
 
-    for (int row = 0; row < BOARD_HEIGHT; row++)
+    for (int row = 0; row < bheight; row++)
     {
-        for (int col = 0; col < BOARD_WIDTH; col++)
+        for (int col = 0; col < bwidth; col++)
         {
-            switch (game->board[row][col])
+            if (game->board[row][col] == 1)
             {
-            case PLAYER_ONE:
                 printf("🔴 ");
-                break;
-            case PLAYER_TWO:
+            }
+            else if (game->board[row][col] == 2)
+            {
                 printf("🟡 ");
-                break;
-            default:
+            }
+            else
+            {
                 printf("⚫ ");
-                break;
             }
         }
         printf("\n");
     }
 
-    printf("%s--------------------%s\n", ORANGE, RESET);
+    printf("%s--------------------%s\n", orange, reset);
 
     if (game->is_finished)
     {
-        if (game->winner == PLAYER_ONE)
+        if (game->winner == player_one)
         {
-            printf("%s🔴 Player 1 has won!%s\n", ORANGE, RESET);
+            printf("%s🔴 Player 1 has won!%s\n", orange, reset);
         }
-        else if (game->winner == PLAYER_TWO)
+        else if (game->winner == player_two)
         {
-            printf("%s🟡 Player 2 has won!%s\n", ORANGE, RESET);
+            printf("%s🟡 Player 2 has won!%s\n", orange, reset);
         }
         else
         {
-            printf("%sIt's a draw!%s\n", ORANGE, RESET);
+            printf("%sIt's a draw!%s\n", orange, reset);
         }
-        printf("%s--------------------%s\n", ORANGE, RESET);
+        printf("%s--------------------%s\n", orange, reset);
     }
 }
 
 void display_error(Game *game, const char *error)
 {
     display_board(game);
-    printf("%sError: %s%s\n", RED, error, RESET);
+    printf("%sError: %s%s\n", red, error, reset);
 }

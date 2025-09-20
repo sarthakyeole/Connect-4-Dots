@@ -12,7 +12,7 @@ int main()
         while (!game.is_finished)
         {
             printf("\n");
-            if (game.current_player == PLAYER_ONE)
+            if (game.current_player == player_one)
                 printf("PLAYER 1\n");
             else
                 printf("PLAYER 2\n");
