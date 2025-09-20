@@ -3,26 +3,28 @@
 
 #include <stdbool.h>
 
-// ---------- Constants ----------
-#define BOARD_WIDTH 7
-#define BOARD_HEIGHT 6
+// borad size
+#define bwidth 7
+#define bheight 6
 
-// ---------- Enums & Structs ----------
-typedef enum {
-    PLAYER_NONE = 0,
-    PLAYER_ONE = 1,
-    PLAYER_TWO = 2
+// structs and enums
+typedef enum
+{
+    player_none = 0,
+    player_one = 1,
+    player_two = 2
 } Player;
 
-typedef struct {
+typedef struct
+{
     int current_move;
     Player current_player;
-    int board[BOARD_HEIGHT][BOARD_WIDTH];
+    int board[bheight][bwidth];
     bool is_finished;
     Player winner;
 } Game;
 
-// ---------- Function Declarations ----------
+// functions
 // game.c
 Game new_game();
 bool play_move(Game *game, int column);
